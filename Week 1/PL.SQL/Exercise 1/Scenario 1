@@ -1,0 +1,62 @@
+CREATE TABLE customers (
+    customer_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    age NUMBER
+);
+
+CREATE TABLE loans (
+    loan_id NUMBER PRIMARY KEY,
+    customer_id NUMBER,
+    interest_rate NUMBER(5,2),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+INSERT INTO customers VALUES (101, 'Ravi', 65);
+INSERT INTO customers VALUES (102, 'Priya', 45);
+INSERT INTO customers VALUES (103, 'Suresh', 70);
+
+INSERT INTO loans VALUES (201, 101, 9.00);
+INSERT INTO loans VALUES (202, 102, 10.00);
+INSERT INTO loans VALUES (203, 103, 8.00);
+
+COMMIT;
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR customer_cursor IS
+        SELECT c.customer_id,
+               c.name,
+               c.age,
+               l.loan_id,
+               l.interest_rate
+        FROM customers c
+        JOIN loans l
+        ON c.customer_id = l.customer_id;
+
+BEGIN
+    FOR customer_record IN customer_cursor LOOP
+
+        -- Check if customer's age is above 60
+        IF customer_record.age > 60 THEN
+
+            -- Apply 1% discount on loan interest rate
+            UPDATE loans
+            SET interest_rate = interest_rate - 1
+            WHERE loan_id = customer_record.loan_id;
+
+            DBMS_OUTPUT.PUT_LINE(
+                'Discount applied to ' ||
+                customer_record.name ||
+                '. New Interest Rate = ' ||
+                (customer_record.interest_rate - 1) || '%'
+            );
+
+        END IF;
+
+    END LOOP;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('Interest rates updated successfully.');
+
+END;
+/

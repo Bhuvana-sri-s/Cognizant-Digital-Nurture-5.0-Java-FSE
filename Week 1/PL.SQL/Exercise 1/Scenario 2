@@ -1,0 +1,44 @@
+CREATE TABLE customers (
+    customer_id NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    balance NUMBER(10,2),
+    isVIP VARCHAR2(5)
+);
+INSERT INTO customers VALUES (101,'Ravi',15000,'FALSE');
+INSERT INTO customers VALUES (102,'Priya',8000,'FALSE');
+INSERT INTO customers VALUES (103,'Suresh',12000,'FALSE');
+INSERT INTO customers VALUES (104,'Anita',9500,'FALSE');
+
+COMMIT;
+DECLARE
+    CURSOR customer_cursor IS
+        SELECT customer_id,
+               name,
+               balance
+        FROM customers;
+
+BEGIN
+    FOR customer_record IN customer_cursor LOOP
+
+        -- Check if balance is greater than 10000
+        IF customer_record.balance > 10000 THEN
+
+            UPDATE customers
+            SET isVIP = 'TRUE'
+            WHERE customer_id = customer_record.customer_id;
+
+            DBMS_OUTPUT.PUT_LINE(
+                customer_record.name ||
+                ' has been promoted to VIP.'
+            );
+
+        END IF;
+
+    END LOOP;
+
+    COMMIT;
+
+    DBMS_OUTPUT.PUT_LINE('VIP status updated successfully.');
+
+END;
+/
