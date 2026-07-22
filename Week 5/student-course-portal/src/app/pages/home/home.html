@@ -1,0 +1,45 @@
+<section class="home-container">
+
+  <h1>Welcome to {{ portalTitle }}</h1>
+
+  <p>Hello, {{ studentName }}!</p>
+
+  <p>
+    Manage your courses, track your enrollment, and monitor your academic progress.
+  </p>
+
+  <div class="stats-row">
+
+    <div class="stat-card">
+      <h3>Courses Available</h3>
+      <p>{{ coursesAvailable }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>Enrolled</h3>
+      <p>{{ enrolledCourses }}</p>
+    </div>
+
+    <div class="stat-card">
+      <h3>GPA</h3>
+      <p>{{ gpa }}</p>
+    </div>
+
+  </div>
+ <button (click)="enrollCourse()">
+  Enroll in Course
+</button>
+<div class="student-input">
+
+  <label>Enter your name:</label>
+
+  <input
+    type="text"
+    [(ngModel)]="studentName"
+  />
+
+  <p>Hello, {{ studentName }}!</p>
+
+</div>  
+
+</section>

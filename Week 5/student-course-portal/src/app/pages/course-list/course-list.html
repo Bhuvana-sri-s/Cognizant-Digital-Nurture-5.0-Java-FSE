@@ -1,0 +1,36 @@
+<h2>Available Courses</h2>
+
+<p *ngIf="isLoading">
+  Loading courses...
+</p>
+
+<p
+  *ngIf="errorMessage"
+  class="error"
+>
+  {{ errorMessage }}
+</p>
+
+<div
+  class="course-card"
+  *ngFor="let course of courses"
+  (click)="openCourse(course.id)"
+>
+
+  <h3>
+    {{ course.name }}
+  </h3>
+
+  <p>
+    Code: {{ course.code }}
+  </p>
+
+  <p>
+    Credits: {{ course.credits }}
+  </p>
+
+  <p>
+    Status: {{ course.gradeStatus }}
+  </p>
+
+</div>

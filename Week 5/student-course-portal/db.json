@@ -1,0 +1,41 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Angular",
+      "code": "CS101",
+      "credits": 4,
+      "gradeStatus": "pending"
+    },
+    {
+      "id": 2,
+      "name": "Spring Boot",
+      "code": "CS102",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 3,
+      "name": "Database Management",
+      "code": "CS103",
+      "credits": 3,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 4,
+      "name": "Data Structures",
+      "code": "CS104",
+      "credits": 4,
+      "gradeStatus": "pending"
+    },
+    {
+      "id": 5,
+      "name": "Computer Networks",
+      "code": "CS105",
+      "credits": 3,
+      "gradeStatus": "failed"
+    }
+  ],
+  "students": [],
+  "enrollments": []
+}
